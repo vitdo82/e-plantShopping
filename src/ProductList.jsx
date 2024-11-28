@@ -7,6 +7,7 @@ import {addItem} from "./CartSlice.jsx";
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false);
+
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
 
@@ -239,6 +240,7 @@ function ProductList() {
         fontSize: '30px',
         textDecoration: 'none',
     }
+
     const handleCartClick = (e) => {
         e.preventDefault();
         setShowCart(true); // Set showCart to true when cart icon is clicked
@@ -308,9 +310,7 @@ function ProductList() {
                                     <div className="product-price">${plant.cost}</div>
                                     <div>{plant.description}</div>
 
-                                    <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to
-                                        Cart
-                                    </button>
+                                    <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                                 </div>
                             ))}
                             </div>
