@@ -8,6 +8,8 @@ import {addItem} from "./CartSlice.jsx";
 function ProductList() {
     const [showCart, setShowCart] = useState(false);
 
+    const cart = useSelector(state => state.cart.items);
+
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
 
@@ -264,6 +266,10 @@ function ProductList() {
         }));
     };
 
+    const calculateTotalCartItem = () => {
+        return cart.length !== 0 ? cart.length : '';
+    }
+
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -283,6 +289,8 @@ function ProductList() {
                     <div><a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
                     <div><a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
                         <h1 className='cart'>
+                            <div>{calculateTotalCartItem()}</div>
+
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor"
                                  height="68" width="68">
                                 <rect width="156" height="156" fill="none"></rect>
@@ -301,17 +309,19 @@ function ProductList() {
                 <div className="product-grid">
                     {plantsArray.map((item, index) => (
                         <div key={index}>
-                            <h1><div>{item.category}</div></h1>
+                            <h1><div style="text-align: center;">{item.category}</div></h1>
                             <div className="product-list">
                             {item.plants.map((plant, plantIndex) => (
-                                <div className="product-card" key={plantIndex}>
-                                    <img className="product-image" src={plant.image} alt={plant.name}/>
-                                    <div className="product-title">{plant.name}</div>
-                                    <div className="product-price">${plant.cost}</div>
-                                    <div>{plant.description}</div>
+                                    <div className="product-card" key={plantIndex}>
+                                        <img className="product-image" src={plant.image} alt={plant.name}/>
+                                        <div className="product-title">{plant.name}</div>
+                                        <div className="product-price">${plant.cost}</div>
+                                        <div>{plant.description}</div>
 
-                                    <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
-                                </div>
+                                        <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to
+                                            Cart
+                                        </button>
+                                    </div>
                             ))}
                             </div>
                         </div>
